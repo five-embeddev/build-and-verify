@@ -1,0 +1,19 @@
+version: "3"
+services:
+
+  build_env:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: riscv_xpack_gcc_dev_env 
+      args:
+        DOCKER_USER_UID: 1000
+    image: five_embeddev/riscv_xpack_gcc_dev_env 
+    command: ["riscv-none-embed-gcc", "--version"]
+
+  shell:
+    image: five_embeddev/riscv_xpack_gcc_dev_env 
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    command: ["bash"]
+ 

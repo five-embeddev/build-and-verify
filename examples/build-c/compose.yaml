@@ -1,0 +1,21 @@
+version: "3"
+services:
+
+  build_host:
+    image: five_embeddev/build_env
+    volumes:
+        - .:/project
+    command: ["gcc", "test.c",  "-o", "host_out" ]
+
+  build_xpack: 
+    image: five_embeddev/riscv_xpack_gcc_dev_env 
+    volumes:
+        - .:/project
+    command: ["riscv-none-embed-gcc", "test.c", "-nostartfiles", "-o", "riscv-none-embed_out" ]
+
+  build_gnu_toolchain: 
+    image: five_embeddev/riscv_gnu_toolchain_dev_env 
+    volumes:
+        - .:/project
+    command: ["riscv32-unknown-elf-gcc", "test.c",  "-o", "riscv32-unknown-elf_out" ]
+   

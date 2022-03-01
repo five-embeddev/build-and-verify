@@ -1,0 +1,29 @@
+version: "3"
+services:
+
+  build_env:
+    build:
+      context: ../riscv-tool-build/
+      dockerfile: Dockerfile
+      target: riscv_tools_build_env
+    image: five_embeddev/build_env
+    volumes:
+      - ./build_dir:/project/build_dir
+      - ./docker_build/install_dir:/opt/riscv-gnu-toolchain
+
+  dev_env:
+    build:
+      context: docker_build/
+      dockerfile: Dockerfile
+      target: riscv_gnu_toolchain_dev_env 
+      args:
+        DOCKER_USER_UID: 1000
+    image: five_embeddev/riscv_gnu_toolchain_dev_env
+    command: ["riscv32-unknown-elf-gcc", "--version"]
+
+  shell:
+    image: five_embeddev/riscv_gnu_toolchain_dev_env
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    command: ["bash"]
+ 
