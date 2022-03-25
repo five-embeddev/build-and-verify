@@ -8,6 +8,7 @@ services:
       target: build_env
     volumes:
         - .:/project
+        - ../test-code-c:/project/test_code
     
   sim_test_code: 
     build:
@@ -16,3 +17,4 @@ services:
       target: sim_env
     volumes:
         - .:/project
+        - ../test-code-c:/project/test_code

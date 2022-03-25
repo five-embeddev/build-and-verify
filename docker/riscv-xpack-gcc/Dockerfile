@@ -72,5 +72,7 @@ COPY --from=riscv_xpack_gcc_xpm_env /home/docker_user/.xpack/ /home/docker_user/
 
 ENV PATH=/home/docker_user/.xpack/repos/@xpack-dev-tools/riscv-none-embed-gcc/${XPACK_GCC_VERSION}/.content/bin:/bin/:/usr/bin
 
+RUN sudo ln -s /home/docker_user/.xpack/repos/@xpack-dev-tools/riscv-none-embed-gcc/${XPACK_GCC_VERSION}/.content /opt/riscv-none-embed
+
 RUN sudo mkdir /project && sudo chown docker_user /project
 WORKDIR /project

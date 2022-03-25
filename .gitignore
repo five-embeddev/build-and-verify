@@ -1,4 +1,5 @@
 docker/riscv-gnu-toolchain-2/docker_build/install_dir/
+examples/build-run-sim/build/
 CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles
@@ -11,3 +12,7 @@ CTestTestfile.cmake
 _deps
 
 *~
+
+**/build/*
+*.log
+

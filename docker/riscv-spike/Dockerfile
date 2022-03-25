@@ -25,7 +25,8 @@ RUN git submodule update  \
     --init \
     --recursive \
     --recommend-shallow 
-	   
+
+RUN sudo apt-get install -y libasio-dev libboost-regex-dev libboost-system-dev libboost-thread-dev
 # Configure
 RUN mkdir build/
 WORKDIR  /work/git/riscv-isa-sim/build
@@ -60,6 +61,8 @@ RUN useradd \
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 COPY --from=riscv_spike_build_config ${INSTALL_PATH} ${INSTALL_PATH}
+
+RUN sudo apt-get install -y  libboost-regex1.71.0
 
 USER docker_user
 ENV PATH=${INSTALL_PATH}/bin:/bin:/usr/bin:/usr/local/bin

@@ -33,3 +33,5 @@ sim_help:
 	docker-compose run sim_test_code \
 		/opt/riscv-isa-sim/bin/spike \
 			--help
+
+.PHONY : build sim

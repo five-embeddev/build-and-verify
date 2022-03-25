@@ -1,0 +1,54 @@
+services:
+
+  build_test_code: 
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: build_env
+    volumes:
+        - .:/project
+        - ../test-code-c:/project/test_code
+
+  spike_openocd:
+    build:
+      context : .
+      dockerfile: Dockerfile
+      target: debug_env_sim
+    image: five_embeddev/examples/riscv_spike_debug_env_sim
+    ports:
+      - "4444:4444"
+      - "6666:6666"
+      - "3333:3333"
+    network_mode: 'host'
+    command: []
+    tty: true
+    volumes:
+        - .:/project
+        - ../test-code-c:/project/test_code
+
+  spike_gdb:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: gdb_env
+    image: five_embeddev/examples/riscv_spike_debug_env_gdb
+    ports:
+      - "3333:3333"
+    network_mode: 'host'
+    command: []
+    tty: true
+    volumes:
+        - .:/project
+        - ../test-code-c:/project/test_code
+
+  spike_openocd_gdb:
+    build:
+      context : .
+      dockerfile: Dockerfile
+      target: debug_env_sim_gdb
+    image: five_embeddev/examples/riscv_spike_debug_env_sim_gdb
+    command: []
+    tty: true
+    volumes:
+        - .:/project
+        - ../test-code-c:/project/test_code
