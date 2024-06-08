@@ -1,13 +1,14 @@
-ARG TOOLCHAIN_TAG=master
+ARG GNU_TOOLCHAIN_TAG=2022.03.09
 ARG GCC_TAG=riscv-gcc-10.2.0
 ARG RISCV_MARCH=rv32imac
 ARG RISCV_ABI=ilp32
 ARG DOCKER_USER_UID=1000
+ARG BASE_IMAGE=ubuntu:focal
 
 # ------------------------------------------------------------------------
-FROM five_embeddev/build_env:latest  AS riscv_gnu_toolchain_build_config
+FROM fiveembeddev/build_env:latest  AS riscv_gnu_toolchain_build_config
 
-ARG TOOLCHAIN_TAG
+ARG GNU_TOOLCHAIN_TAG
 ARG GCC_TAG
 ARG RISCV_MARCH
 ARG RISCV_ABI
@@ -16,7 +17,7 @@ RUN sudo mkdir -p /work/git  && sudo chown -R docker_user /work/
 WORKDIR  /work/git/
 RUN git clone \
     --depth 1\
-    --branch ${TOOLCHAIN_TAG} \
+    --branch ${GNU_TOOLCHAIN_TAG} \
     https://github.com/riscv-collab/riscv-gnu-toolchain.git
 WORKDIR  /work/git/riscv-gnu-toolchain/
 
@@ -45,7 +46,8 @@ RUN make
 # ------------------------------------------------------------------------
 # Lightwieght container with only tools, no source
 
-FROM ubuntu:focal AS riscv_gnu_toolchain_dev_env
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE} AS riscv_gnu_toolchain_dev_env
 
 ARG DOCKER_USER_UID
 ARG TZ

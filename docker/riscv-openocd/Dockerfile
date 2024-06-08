@@ -1,7 +1,8 @@
 ARG OPENOCD_TAG=riscv
 ARG DOCKER_USER_UID=1000
+ARG BASE_IMAGE=ubuntu:focal
 
-FROM five_embeddev/build_env:latest  AS riscv_openocd_build_config
+FROM fiveembeddev/build_env:latest AS riscv_openocd_build_config
 
 ARG OPENOCD_TAG
 ENV INSTALL_PATH=/opt/riscv-openocd/
@@ -41,7 +42,8 @@ RUN make
 RUN sudo make install
 
 # Lightwieght container with only tools, no source
-FROM ubuntu:focal AS riscv_openocd_base
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE} AS riscv_openocd_base
 
 ARG DOCKER_USER_UID
 ARG TZ

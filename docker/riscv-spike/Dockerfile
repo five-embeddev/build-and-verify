@@ -1,11 +1,14 @@
 ARG DOCKER_USER_UID=1000
-ARG SPIKE_TAG=master
 ARG TZ=UTC
+ARG SPIKE_TAG=master
+ARG SPIKE_URL=https://github.com/riscv-software-src/riscv-isa-sim.git
+ARG BASE_IMAGE=ubuntu:focal
 
 # ------------------------------------------------------------------------
-FROM five_embeddev/build_env:latest  AS riscv_spike_build_config
+FROM fiveembeddev/build_env:latest  AS riscv_spike_build_config
 
 ARG SPIKE_TAG
+ARG SPIKE_URL
 ENV INSTALL_PATH=/opt/riscv-isa-sim/
 
 RUN sudo apt-get update -qq && sudo apt-get install -y device-tree-compiler
@@ -18,7 +21,7 @@ RUN git clone \
     --depth 1\
     --recursive  \
     --branch ${SPIKE_TAG} \
-    https://github.com/riscv-software-src/riscv-isa-sim.git
+    ${SPIKE_URL}
 
 WORKDIR  /work/git/riscv-isa-sim
 RUN git submodule update  \
@@ -40,7 +43,8 @@ RUN sudo make install
 
 # ------------------------------------------------------------------------
 # Lightwieght container with only tools, no source
-FROM ubuntu:focal AS riscv_spike_dev_env
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE} AS riscv_spike_dev_env
 
 ARG DOCKER_USER_UID
 
