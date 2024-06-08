@@ -1,8 +1,9 @@
-DOCKER_USER_UID:=$(shell id -u)
+include ../common.mak
 
-riscv_rustup_rustc :
-	docker-compose \
-		build \
-		--build-arg DOCKER_USER_UID=${DOCKER_USER_UID} \
-		build_env
+IMAGE_NAME=riscv_rustup_dev_env
+COMPOSE_TARGET=build_env
+RELEASE_TAG:=${RELEASE_TAG}
 
+all : docker-build-${IMAGE_NAME}
+
+include ../targets.mak

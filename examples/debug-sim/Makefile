@@ -1,3 +1,4 @@
+DOCKER_COMPOSE=docker compose
 RISCV_ISA=rv32imac
 RISCV_PRIV=m
 # See test_code/linker.lds
@@ -11,21 +12,21 @@ setup : build_docker build_img
 	@echo "   make gdb_sim - run gdb with spike"
 
 build_docker:
-	docker-compose build
+	${DOCKER_COMPOSE} build
 
 build_img:
-	docker-compose run build_test_code \
+	${DOCKER_COMPOSE} run build_test_code \
 		cmake \
 			-S test_code \
 			-B build \
 			-G "Unix Makefiles" \
 			-DCMAKE_TOOLCHAIN_FILE=../test_code/riscv.cmake
-	docker-compose run build_test_code \
+	${DOCKER_COMPOSE} run build_test_code \
 		make \
 			-C build
 
 sim:
-	docker-compose run spike_openocd \
+	${DOCKER_COMPOSE} run spike_openocd \
 			--isa=${RISCV_ISA} \
 			--priv=${RISCV_PRIV} \
 			-m${BOARD_MEM}  \
@@ -34,7 +35,7 @@ sim:
 
 
 gdb_sim:
-	docker-compose run spike_openocd_gdb \
+	${DOCKER_COMPOSE} run spike_openocd_gdb \
 			--isa=${RISCV_ISA} \
 			--priv=${RISCV_PRIV} \
 			-m${BOARD_MEM}  \
@@ -43,7 +44,7 @@ gdb_sim:
 
 
 gdb : 
-		docker-compose run spike_gdb \
+		${DOCKER_COMPOSE} run spike_gdb \
 			${ELF_FILE}
 
 clean :
