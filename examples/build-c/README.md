@@ -1,5 +1,4 @@
-Examples on building for the host and target via docker and
-docker-compose.
+Examples on building for the host and target via docker.
 
-The compose.yaml depends on the docker images build in the
+Depends on the docker images build in the
 ../../docker directory. Those should be built first.

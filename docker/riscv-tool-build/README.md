@@ -1,4 +1,4 @@
-Docker environment for building RISC-V tools.
+# Docker environment for building RISC-V tools.
 
 |       |                                         |
 |-------|-----------------------------------------|
