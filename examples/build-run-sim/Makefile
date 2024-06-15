@@ -39,9 +39,44 @@ sim:
 
 gdb:
 	${DOCKER_CMD} \
-			-it \
-		fiveembeddev/riscv_spike_debug_gdb:latest \
+		    --tty \
+		    --interactive \
+            fiveembeddev/riscv_spike_debug_gdb:latest \
+			--isa=${RISCV_ISA} \
+			--priv=${RISCV_PRIV} \
+			-m${BOARD_MEM}  \
+			--pc=0x20010000 \
 			${ELF_FILE}
+
+trace:
+	${DOCKER_CMD} \
+		    fiveembeddev/forked_riscv_spike_debug_sim:latest  \
+			--isa=${RISCV_ISA} \
+			--priv=${RISCV_PRIV} \
+			-m${BOARD_MEM}  \
+			--pc=0x20010000 \
+		    --vcd-log=test.vcd \
+		    --max-cycles=10000  \
+			${ELF_FILE}
+
+gtkwave: 
+	${DOCKER_CMD} \
+	    --tty \
+	    --interactive \
+	     -v /tmp/.X11-unix:/tmp/.X11-unix \
+	     -e DISPLAY=:0 \
+		 -e DECODE_ELF=${ELF_FILE} \
+	     fiveembeddev/riscv_gtkwave_base:latest \
+         gtkwave test.vcd test.gtkw
+
+decode-test: 
+	${DOCKER_CMD} \
+	    --tty \
+	    --interactive \
+		 -e DECODE_ELF=${ELF_FILE} \
+	     fiveembeddev/riscv_gtkwave_base:latest \
+		./test-decode.sh
+
 
 sim_help:
 	docker-compose run sim_test_code \

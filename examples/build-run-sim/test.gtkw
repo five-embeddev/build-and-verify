@@ -1,0 +1,32 @@
+[*]
+[*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
+[*] Sat Jun 15 14:41:00 2024
+[*]
+[dumpfile] "/project/test.vcd"
+[dumpfile_mtime] "Sat Jun 15 14:22:49 2024"
+[dumpfile_size] 6360
+[savefile] "/project/test.gtkw"
+[timestart] 1023
+[size] 1182 591
+[pos] -1 -1
+*0.000000 2 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] riscv_isa_sim.
+[treeopen] riscv_isa_sim.core0.
+[sst_width] 214
+[signals_width] 134
+[sst_expanded] 1
+[sst_vpaned_height] 149
+@4022
+^>1 /opt/riscv-gtkwave/bin/decode_inst
+riscv_isa_sim.core0.processor.insn[63:0]
+@22
+riscv_isa_sim.core0.processor.jump_pc[63:0]
+riscv_isa_sim.core0.processor.pc[63:0]
+@4022
+^>2 /opt/riscv-gtkwave/bin/decode_addr
+riscv_isa_sim.core0.processor.jump_pc[63:0]
+@4023
+^>2 /opt/riscv-gtkwave/bin/decode_addr
+riscv_isa_sim.core0.processor.pc[63:0]
+[pattern_trace] 1
+[pattern_trace] 0
