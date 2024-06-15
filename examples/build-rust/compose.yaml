@@ -1,8 +1,0 @@
-version: "3"
-services:
-
-  build_direct: 
-    image: five_embeddev/riscv_rust_dev_env 
-    volumes:
-        - .:/project
-    command: ["rustc","--target", "riscv32imac-unknown-none-elf", "/project/test.rs", "-o", "test.elf"]

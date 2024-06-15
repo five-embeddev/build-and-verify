@@ -1,0 +1,17 @@
+# -*- Makefile -*-
+include ../common.mak
+
+SPIKE_IMAGE_NAME=forked_riscv_spike_dev_env
+IMAGE_NAME=forked_riscv_spike_debug_sim
+RELEASE_TAG:=${RELEASE_TAG}_spike_${SPIKE_TAG}
+
+DOCKER_BUILD_ARGS += \
+	SPIKE_IMAGE_NAME=${SPIKE_IMAGE_NAME}
+
+all : docker-build-${IMAGE_NAME}
+
+docker-build-${IMAGE_NAME} : riscv-spike-vcd riscv-openocd riscv_spike.cfg
+
+include ../targets.mak
+
+

@@ -1,9 +1,15 @@
-DOCKER_USER_UID:=$(shell id -u)
+include ../common.mak
 
-riscv_openocd : riscv_tools_build_env
-	docker-compose build \
-		--build-arg DOCKER_USER_UID=${DOCKER_USER_UID} \
-		riscv_openocd
+IMAGE_NAME=riscv_openocd_base
 
-riscv_tools_build_env :
-	${MAKE} -C ../riscv-tool-build
+# Override to choose spike fork
+RELEASE_TAG:=${RELEASE_TAG}_openocd_${OPENOCD_TAG}
+
+DOCKER_BUILD_ARGS += \
+	OPENOCD_TAG=${OPENOCD_TAG} \
+
+all : docker-build-${IMAGE_NAME}
+
+docker-build-${IMAGE_NAME} : riscv-tool-build
+
+include ../targets.mak

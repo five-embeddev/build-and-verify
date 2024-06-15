@@ -4,7 +4,8 @@ ARG TZ=UTC
 # ------------------------------------------------------------------------
 # Just the RUST installer
 
-FROM ubuntu:focal AS riscv_rustup_env 
+ARG BASE_IMAGE=ubuntu:focal
+FROM ${BASE_IMAGE} AS riscv_rustup_env 
 
 ARG DOCKER_USER_UID
 ARG TZ
@@ -51,8 +52,7 @@ WORKDIR /project
 # ------------------------------------------------------------------------
 # Add the RISC-V target
 
-FROM riscv_rustup_env  AS riscv_rust_dev_env
-
+FROM riscv_rustup_env  AS riscv_rustup_dev_env
 
 RUN rustup target add riscv32imac-unknown-none-elf	
 RUN rustup target add riscv32i-unknown-none-elf
@@ -66,5 +66,3 @@ RUN sudo apt-get install -y build-essential
 # For cargo objdump etc
 RUN cargo install cargo-binutils
 RUN rustup component add llvm-tools-preview
-
-

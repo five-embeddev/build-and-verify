@@ -1,4 +1,5 @@
-FROM ubuntu:focal AS riscv_tools_build_env
+ARG BASE_IMAGE=ubuntu:focal
+FROM ${BASE_IMAGE} AS riscv_tools_build_env
 
 ARG DOCKER_USER_UID=1000
 ARG TZ=UTC
@@ -13,6 +14,7 @@ RUN useradd \
     -r \
     -G sudo -s /sbin/nologin \
     -c "Docker image user" \
+    --create-home \
     docker_user
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 USER docker_user

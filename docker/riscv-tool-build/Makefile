@@ -1,6 +1,7 @@
-DOCKER_USER_UID:=$(shell id -u)
+include ../common.mak
+IMAGE_NAME=build_env
 
-riscv_tools_build_env :
-	docker-compose build \
-		--build-arg DOCKER_USER_UID=${DOCKER_USER_UID} \
-		build_env
+all : docker-build-build_env
+
+include ../targets.mak
+

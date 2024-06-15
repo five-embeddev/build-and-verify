@@ -1,10 +1,13 @@
-ARG XPACK_GCC_VERSION=10.1.0-1.1.1
-ARG NODE_VERSION=14.18.0
+ARG XPACK_GCC_VERSION=12.2.0-3.1
+#ARG XPACK_GCC_VERSION=10.1.0-1.1.1
+ARG PACKAGE=riscv-none-elf-gcc
+ARG NODE_VERSION=16.16.0
 ARG NVM_VERSION=v0.38.0
 ARG DOCKER_USER_UID=1000
 ARG TZ=UTC
+ARG BASE_IMAGE=ubuntu:focal
 
-FROM ubuntu:focal AS riscv_xpack_gcc_base_env 
+FROM ${BASE_IMAGE} AS riscv_xpack_gcc_base_env 
 
 ARG DOCKER_USER_UID
 ARG TZ
@@ -54,25 +57,26 @@ RUN npm --version
 FROM riscv_xpack_gcc_node_env AS riscv_xpack_gcc_xpm_env 
 
 ARG XPACK_GCC_VERSION
+ARG PACKAGE
 
 ENV XPACKS_REPO_FOLDER=/home/docker_user/.xpack/repos
 ENV XPACKS_SYSTEM_FOLDER=/home/docker_user/.xpack/system
 
 RUN npm install --global xpm@latest
-RUN xpm install --global --verbose  @xpack-dev-tools/riscv-none-embed-gcc@${XPACK_GCC_VERSION}   
-
+RUN xpm install --global --verbose  @xpack-dev-tools/${PACKAGE}@${XPACK_GCC_VERSION}   
 # ------------------------------------------------------------------------
 # Just the embedded dev tools - no node or xpm
 
 FROM riscv_xpack_gcc_base_env  AS riscv_xpack_gcc_dev_env 
 
 ARG XPACK_GCC_VERSION
+ARG PACKAGE
 
 COPY --from=riscv_xpack_gcc_xpm_env /home/docker_user/.xpack/ /home/docker_user/.xpack/
 
-ENV PATH=/home/docker_user/.xpack/repos/@xpack-dev-tools/riscv-none-embed-gcc/${XPACK_GCC_VERSION}/.content/bin:/bin/:/usr/bin
+ENV PATH=/home/docker_user/.xpack/repos/@xpack-dev-tools/${PACKAGE}/${XPACK_GCC_VERSION}/.content/bin:/bin/:/usr/bin
 
-RUN sudo ln -s /home/docker_user/.xpack/repos/@xpack-dev-tools/riscv-none-embed-gcc/${XPACK_GCC_VERSION}/.content /opt/riscv-none-embed
+RUN sudo ln -s /home/docker_user/.xpack/repos/@xpack-dev-tools/${PACKAGE}/${XPACK_GCC_VERSION}/.content /opt/riscv-none-embed
 
 RUN sudo mkdir /project && sudo chown docker_user /project
 WORKDIR /project

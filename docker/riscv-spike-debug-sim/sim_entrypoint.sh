@@ -12,9 +12,12 @@ trap clean_up SIGHUP SIGINT SIGTERM
 # Print args
 
 echo "SPIKE: STARTING with ARGS: $@"
+ELF=$(find_elf_args $@)
+echo "FOUND ELF: ${ELF}"
 
-ELF_FILE=$(find_elf_args $@)
-echo "FOUND ELF: ${ELF_FILE}"
+if [ "${ELF}" == "" ] ; then
+    echo "NO ELF FILE FOUND: ${ELF}"
+fi
 
 # ------------------------------------------
 # Start sim
@@ -23,6 +26,10 @@ nohup \
     /opt/riscv-isa-sim/bin/spike \
     --rbb-port=${BITBANG_PORT} \
     -H \
+	--isa=${RISCV_ISA} \
+	--priv=${RISCV_PRIV} \
+	-m${BOARD_MEM}  \
+	--pc=${START_PC} \
     "$@" \
     > ${LOG_DIR}/spike.log 2>&1 & echo $! > ${PID_DIR}/spike.pid
 
@@ -55,8 +62,13 @@ waitport "OPENOCD" ${OPENOCD_PID} ${CMD_PORT}
 # ------------------------------------------
 # Wait for exit
 
-echo "OPENOCD: READY"
-echo "GDB: LOAD: ${ELF_FILE}"
+echo "OPENOCD: READY, GDB: ${GDB_PORT}, COMMAND: ${CMD_PORT}"
 
-riscv-none-embed-gdb -ex 'target remote 127.0.0.1:3333' ${ELF_FILE}
+while [ 1 ] ; do
+    sleep 0.1 ;
+    test_alive "SPIKE" $SPIKE_PID
+    test_alive "OPENOCD" $OPENOCD_PID
+done
 
+
+# will not reach here.

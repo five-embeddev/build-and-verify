@@ -2,7 +2,8 @@ ARG DOCKER_USER_UID=1000
 
 # ------------------------------------------------------------------------
 # Lightwieght container with only tools, no source
-FROM ubuntu:focal AS riscv_gnu_toolchain_dev_env
+ARG BASE_IMAGE=ubuntu:focal
+FROM ${BASE_IMAGE} AS riscv_gnu_toolchain_dev_env2
 
 ARG DOCKER_USER_UID
 ARG TZ

@@ -3,7 +3,7 @@ services:
     build:
       context : .
       target: riscv_openocd_base
-    image: five_embeddev/riscv_openocd
+    image: fiveembeddev/riscv_openocd
     ports:
       - "9824:9824"
       - "4000:4000"
@@ -12,7 +12,7 @@ services:
     command: ["openocd", "--version"]
       
   riscv_openocd_shell:
-    image: five_embeddev/riscv_openocd
+    image: fiveembeddev/riscv_openocd
     command: bash
     tty: true
     stdin_open: true

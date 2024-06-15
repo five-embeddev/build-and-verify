@@ -1,7 +1,20 @@
-DOCKER_USER_UID:=$(shell id -u)
+include ../common.mak
 
-riscv_xpack_gcc :
-	docker-compose \
-		build \
-		--build-arg DOCKER_USER_UID=${DOCKER_USER_UID} \
-		build_env
+IMAGE_NAME=riscv_xpack_gcc_dev_env
+COMPOSE_TARGET=build_env
+
+#XPACK_GCC_VERSION=10.1.0-1.1.1
+XPACK_GCC_VERSION=12.2.0-3.1
+NODE_VERSION=16.16.0
+NVM_VERSION=v0.38.0
+
+RELEASE_TAG:=${RELEASE_TAG}_gcc_${XPACK_GCC_VERSION}
+
+DOCKER_BUILD_ARGS += \
+	XPACK_GCC_VERSION=${XPACK_GCC_VERSION} \
+	NODE_VERSION=${NODE_VERSION} \
+	NVM_VERSION=${NVM_VERSION} 
+
+all : docker-build-${IMAGE_NAME}
+
+include ../targets.mak

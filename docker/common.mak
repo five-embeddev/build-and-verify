@@ -1,0 +1,37 @@
+DOCKER=docker
+DOCKER_COMPOSE=${DOCKER} compose
+DOCKER_USER_UID:=$(shell id -u)
+DOCKER_USER_GID:=$(shell id -g)
+
+BASE_IMAGE=ubuntu:focal
+
+DOCKER_REPO=
+DOCKER_USER=fiveembeddev
+
+RELEASE_VERSION=0.1.0
+RELEASE_LABEL=env_${RELEASE_VERSION}
+BUILD_TAG=${DOCKER_USER}/${IMAGE_NAME}:latest
+RELEASE_TAG=${DOCKER_USER}/${IMAGE_NAME}:${RELEASE_LABEL}
+
+DOCKER_BUILD_ARGS=\
+	DOCKER_USER_UID=${DOCKER_USER_UID} \
+	BASE_IMAGE=${BASE_IMAGE}
+
+#NO_CACHE=--no-cache
+NO_CACHE=
+# Show cache
+#export DOCKER_BUILDKIT=0
+
+# Versions
+SPIKE_TAG=v1.1.0
+SPIKE_URL=https://github.com/riscv-software-src/riscv-isa-sim.git
+GNU_TOOLCHAIN_TAG=2022.03.09
+GCC_TAG=riscv-gcc-10.2.0
+
+# Default arch
+RISCV_MARCH=rv32imac
+RISCV_ABI=ilp32
+
+OPENOCD_TAG=riscv
+
+DOCKER_RUN_SHELL=/bin/bash
