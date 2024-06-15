@@ -15,14 +15,14 @@ services:
     build:
       context: docker_build/
       dockerfile: Dockerfile
-      target: riscv_gnu_toolchain_dev_env 
+      target: riscv_gnu_toolchain_dev_env2 
       args:
         DOCKER_USER_UID: 1000
-    image: fiveembeddev/riscv_gnu_toolchain_dev_env
+    image: fiveembeddev/riscv_gnu_toolchain_dev_env2
     command: ["riscv32-unknown-elf-gcc", "--version"]
 
   shell:
-    image: fiveembeddev/riscv_gnu_toolchain_dev_env
+    image: fiveembeddev/riscv_gnu_toolchain_dev_env2
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     command: ["bash"]

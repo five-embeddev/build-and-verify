@@ -2,10 +2,6 @@ include ../common.mak
 
 MOUNT_BUILD_PATH=/project/build_dir
 MOUNT_INSTALL_PATH=/opt/riscv-gnu-toolchain
-TOOLCHAIN_TAG=master
-GCC_TAG=riscv-gcc-10.2.0
-RISCV_MARCH=rv32imac
-RISCV_ABI=ilp32
 COMPOSE_RUN_BUILD_DIR=${DOCKER_COMPOSE} run -w ${MOUNT_BUILD_PATH} build_env
 COMPOSE_RUN_SRC_DIR=${DOCKER_COMPOSE} run -w ${MOUNT_BUILD_PATH}/riscv-gnu-toolchain build_env
 
@@ -19,9 +15,10 @@ docker_build/install_dir/bin/riscv32-unknown-elf-gcc :
 	${DOCKER_COMPOSE} build \
 		--build-arg DOCKER_USER_UID=${DOCKER_USER_UID} \
 		build_env
+	${COMPOSE_RUN_BUILD_DIR} rm -rf riscv-gnu-toolchain
 	${COMPOSE_RUN_BUILD_DIR} git clone \
 		--depth 1 \
-		--branch ${TOOLCHAIN_TAG} \
+		--branch ${GNU_TOOLCHAIN_TAG} \
 		https://github.com/riscv-collab/riscv-gnu-toolchain.git
 	${COMPOSE_RUN_SRC_DIR} git submodule set-branch --branch ${GCC_TAG} riscv-gcc
 	${COMPOSE_RUN_SRC_DIR} git submodule update  \
