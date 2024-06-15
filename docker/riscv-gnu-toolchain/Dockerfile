@@ -71,7 +71,7 @@ USER docker_user
 
 COPY --from=riscv_gnu_toolchain_build_config ${INSTALL_PATH} ${INSTALL_PATH}
 
-ENV PATH=${INSTALL_PATH}:/bin:/usr/bin:/usr/local/bin
+ENV PATH=${INSTALL_PATH}/bin:/bin:/usr/bin:/usr/local/bin
 
 RUN sudo mkdir /project && sudo chown docker_user /project
 WORKDIR /project

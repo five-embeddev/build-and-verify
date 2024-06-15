@@ -1,7 +1,7 @@
 # -*- Makefile -*-
 include ../common.mak
 
-IMAGE_NAME=forked_riscv_spike_dev_env
+IMAGE_NAME=riscv_spike_dev_env
 COMPOSE_TARGET=riscv_spike
 
 # Override to choose spike fork

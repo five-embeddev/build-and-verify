@@ -13,7 +13,6 @@ RUN sudo mkdir -p /opt/riscv-none-embed/bin
 COPY --from=fiveembeddev/riscv_xpack_gcc_dev_env:latest \
     /opt/riscv-none-embed/bin/riscv-none-elf-gdb \
     /opt/riscv-none-embed/bin/
-
 COPY --from=fiveembeddev/riscv_xpack_gcc_dev_env:latest \
     /opt/riscv-none-embed/libexec \
     /opt/riscv-none-embed/libexec
