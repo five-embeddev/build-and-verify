@@ -5,8 +5,8 @@
 
 # Look for GCC in path
 # https://xpack.github.io/riscv-none-embed-gcc/
-FIND_FILE( RISCV_XPACK_GCC_COMPILER_EXE "riscv-none-embed-gcc.exe" PATHS ENV INCLUDE)
-FIND_FILE( RISCV_XPACK_GCC_COMPILER "riscv-none-embed-gcc" PATHS ENV INCLUDE)
+FIND_FILE( RISCV_XPACK_GCC_COMPILER_EXE "riscv-none-elf-gcc.exe" PATHS ENV INCLUDE)
+FIND_FILE( RISCV_XPACK_GCC_COMPILER "riscv-none-elf-gcc" PATHS ENV INCLUDE)
 
 # Look for RISC-V github GCC
 # https://github.com/riscv/riscv-gnu-toolchain
@@ -40,7 +40,7 @@ message( "RISC-V Cross Compile: ${CROSS_COMPILE}" )
 # The Generic system name is used for embedded targets (targets without OS) in
 # CMake
 set( CMAKE_SYSTEM_NAME          Generic )
-set( CMAKE_SYSTEM_PROCESSOR     rv32imac )
+set( CMAKE_SYSTEM_PROCESSOR     rv32imac_zicsr )
 set( CMAKE_EXECUTABLE_SUFFIX    ".elf")
 
 # specify the cross compiler. We force the compiler so that CMake doesn't
