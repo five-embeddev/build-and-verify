@@ -9,6 +9,7 @@ build push :
 	${MAKE} -C riscv-spike-debug-sim/ $@
 	${MAKE} -C riscv-spike-debug-sim/  -f Makefile.vcd_spike $@
 	${MAKE} -C riscv-spike-debug-gdb/ $@
+	${MAKE} -C riscv-spike-debug-gdb/  -f Makefile.vcd_spike $@
 	${MAKE} -C riscv-rust/ $@
 
 .PHONY: login

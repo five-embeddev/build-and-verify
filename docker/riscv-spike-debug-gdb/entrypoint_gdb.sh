@@ -15,6 +15,7 @@ echo "SPIKE: STARTING with ARGS: $@"
 
 ELF_FILE=$(find_elf_args $@)
 echo "FOUND ELF: ${ELF_FILE}"
+echo "OTHER ARGS: ${@}"
 
 # ------------------------------------------
 # Start sim
@@ -27,7 +28,7 @@ nohup \
 	--priv=${RISCV_PRIV} \
 	-m${BOARD_MEM}  \
 	--pc=${START_PC} \
-    "$@" \
+    $@ \
     > ${LOG_DIR}/spike.log 2>&1 & echo $! > ${PID_DIR}/spike.pid
 
 if [ -f ${PID_DIR}/spike.pid ] ; then

@@ -1,3 +1,7 @@
+
+.PHONY: 
+build:  docker-build-${IMAGE_NAME}
+
 .PHONY: compose-build-${IMAGE_NAME}
 compose-build-${IMAGE_NAME} : 
 	${DOCKER_COMPOSE} build \
