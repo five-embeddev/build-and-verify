@@ -10,7 +10,7 @@
 
 Following tools installed:
 - [GTKWave](https://gtkwave.sourceforge.net/)
-- [RISC-V GTKWave Decoders](https://gtkwave.sourceforge.net/)
+- [RISC-V GTKWave Decoders](https://github.com/five-embeddev/riscv-gtkwave)
 
 GTKWave is an x11 app, expose X11 env.
 
