@@ -25,3 +25,32 @@ docker run \
      fiveembeddev/riscv_gtkwave_base:latest \
      gtkwave vcd-trace.vcd config.gtkw
 ```
+
+Decode elf address:
+
+``` bash
+docker run \
+    --tty \
+    --interactive \
+    --rm \
+    -v .:/project \
+    -eDECODE_ELF=build_target/src/main.elf \ 
+    fiveembeddev/riscv_gtkwave_base:latest
+    /opt/riscv_gtkwave/bin/decode_addr
+0x21000000
+__clz_tab+0xfeffec
+```
+
+
+Decode risc-v opcode:
+
+``` bash
+docker run \
+    --tty \
+    --interactive \
+    --rm \
+    fiveembeddev/riscv_gtkwave_base:latest
+    /opt/riscv_gtkwave/bin/decode_inst-rv32imac
+0
+c.unimp
+```

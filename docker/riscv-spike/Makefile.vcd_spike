@@ -5,7 +5,7 @@ IMAGE_NAME=forked_riscv_spike_dev_env
 COMPOSE_TARGET=riscv_spike
 
 # Override to choose spike fork
-SPIKE_TAG=vcd_trace
+SPIKE_TAG=vcd_trace_20241109
 SPIKE_URL=https://github.com/five-embeddev/riscv-isa-sim.git
 RELEASE_TAG:=${RELEASE_TAG}_spike_${SPIKE_TAG}
 

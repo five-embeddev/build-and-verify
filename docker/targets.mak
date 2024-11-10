@@ -26,7 +26,9 @@ shell :
 		--user ${DOCKER_USER_UID}:${DOCKER_USER_GID} \
 		-v .:/project \
 		${DOCKER_RUN_ARGS} \
-		 ${BUILD_TAG} ${DOCKER_RUN_SHELL}
+        --entrypoint ${DOCKER_RUN_SHELL} \
+		 ${BUILD_TAG} \
+         
 
 .PHONY: push
 push : 

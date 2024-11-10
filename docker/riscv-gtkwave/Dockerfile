@@ -35,7 +35,8 @@ RUN cd extern/riscv-isa-sim/ && ./configure
 RUN	make -C extern/riscv-isa-sim/ -j8
 RUN make csrs
 RUN make -C src
-RUN make install PREFIX_DIR=${INSTALL_PATH}
+RUN sudo mkdir -p ${INSTALL_PATH}
+RUN sudo make install PREFIX_DIR=${INSTALL_PATH}
 
 # ------------------------------------------------------------------------
 ARG BASE_IMAGE
