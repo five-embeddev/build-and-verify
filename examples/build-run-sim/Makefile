@@ -47,6 +47,7 @@ gdb:
 			-m${BOARD_MEM}  \
 			--pc=0x20010000 \
 			${ELF_FILE}
+
 trace:
 	${DOCKER_CMD} \
 		    fiveembeddev/forked_riscv_spike_debug_sim:latest  \

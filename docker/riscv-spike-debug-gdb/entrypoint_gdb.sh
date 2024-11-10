@@ -17,6 +17,7 @@ ELF_FILE=$(find_elf_args $@)
 echo "FOUND ELF: ${ELF_FILE}"
 echo "OTHER ARGS: ${@}"
 
+
 # ------------------------------------------
 # Start sim
 

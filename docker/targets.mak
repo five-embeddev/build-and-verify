@@ -2,6 +2,7 @@
 .PHONY: 
 build:  docker-build-${IMAGE_NAME}
 
+
 .PHONY: compose-build-${IMAGE_NAME}
 compose-build-${IMAGE_NAME} : 
 	${DOCKER_COMPOSE} build \
@@ -27,8 +28,8 @@ shell :
 		-v .:/project \
 		${DOCKER_RUN_ARGS} \
         --entrypoint ${DOCKER_RUN_SHELL} \
-		 ${BUILD_TAG} \
-         
+		 ${BUILD_TAG} 
+        
 
 .PHONY: push
 push : 
