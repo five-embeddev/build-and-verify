@@ -1,3 +1,8 @@
+
+.PHONY: 
+build:  docker-build-${IMAGE_NAME}
+
+
 .PHONY: compose-build-${IMAGE_NAME}
 compose-build-${IMAGE_NAME} : 
 	${DOCKER_COMPOSE} build \
@@ -22,7 +27,9 @@ shell :
 		--user ${DOCKER_USER_UID}:${DOCKER_USER_GID} \
 		-v .:/project \
 		${DOCKER_RUN_ARGS} \
-		 ${BUILD_TAG} ${DOCKER_RUN_SHELL}
+        --entrypoint ${DOCKER_RUN_SHELL} \
+		 ${BUILD_TAG} 
+        
 
 .PHONY: push
 push : 

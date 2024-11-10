@@ -9,6 +9,9 @@
 |*Workdir*| `/project`|
 |*Tool Path*| `/opt/riscv-isa-sim/`|
 |*Tool Path*| `/opt/riscv-openocd/`|
+|*GDB Port*| 3333 |
+|*OpenOCD TCL Port*| 6666 |
+|*OpenOCD CMD Port*| 4444 |
 
 Docker environment for running spike with openocd for exposing a GDB
 port for debugging RISC-V applications.
@@ -20,9 +23,10 @@ Expose a server for GDB.
 ~~~
 docker run \
     -it \
+    -p 3333:3333
     --rm \
     -v .:/project \
-    fiveembeddev/forked_riscv_debug_sim:latest  \
+    fiveembeddev/riscv_spike_debug_sim:latest  \
     build_target/src/main.elf
 ~~~
 
