@@ -4,7 +4,7 @@ ARG TZ=UTC
 # ------------------------------------------------------------------------
 # Just the RUST installer
 
-ARG BASE_IMAGE=ubuntu:focal
+ARG BASE_IMAGE=ubuntu:jammy
 FROM ${BASE_IMAGE} AS riscv_rustup_env 
 
 ARG DOCKER_USER_UID

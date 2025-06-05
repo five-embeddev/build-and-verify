@@ -3,7 +3,7 @@ ARG GCC_TAG=riscv-gcc-10.2.0
 ARG RISCV_MARCH=rv32imac
 ARG RISCV_ABI=ilp32
 ARG DOCKER_USER_UID=1000
-ARG BASE_IMAGE=ubuntu:focal
+ARG BASE_IMAGE=ubuntu:jammy
 
 # ------------------------------------------------------------------------
 FROM fiveembeddev/build_env:latest  AS riscv_gnu_toolchain_build_config

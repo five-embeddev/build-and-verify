@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=ubuntu:focal
+ARG BASE_IMAGE=ubuntu:jammy
 FROM ${BASE_IMAGE} AS riscv_tools_build_env
 
 ARG DOCKER_USER_UID=1000
