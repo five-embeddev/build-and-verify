@@ -1,6 +1,6 @@
 ARG OPENOCD_TAG=riscv
 ARG DOCKER_USER_UID=1000
-ARG BASE_IMAGE=ubuntu:focal
+ARG BASE_IMAGE=ubuntu:jammy
 
 FROM fiveembeddev/build_env:latest AS riscv_openocd_build_config
 
@@ -27,8 +27,9 @@ RUN git submodule update \
 RUN git submodule update \
     --init \ 
     --recommend-shallow \
-    tools/git2cl \
     src/jtag/drivers/libjaylink
+
+RUN sudo apt-get update && sudo apt-get install -y libjim-dev
 
 # Configure
 RUN ./bootstrap

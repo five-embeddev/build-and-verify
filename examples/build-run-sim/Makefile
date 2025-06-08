@@ -10,6 +10,8 @@ DOCKER_CMD=	docker run \
          -v .:/project \
          -v ${CURDIR}/../test-code-c:/project/test_code
 
+all : build
+
 build:
 	${DOCKER_CMD} \
 		fiveembeddev/riscv_xpack_gcc_dev_env:latest \
@@ -83,4 +85,7 @@ sim_help:
 		/opt/riscv-isa-sim/bin/spike \
 			--help
 
-.PHONY : build sim
+clean :
+	rm -rf test.vcd build/
+
+.PHONY : build sim clean

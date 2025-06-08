@@ -1,0 +1,11 @@
+{
+    "configurePresets": [
+        {
+            "name": "RISC-V Build",
+            "displayName": "RISC-V Build Preset",
+            "binaryDir": "${sourceDir}/build/default",
+            "generator": "Makefile",
+            "toolchainFile": "riscv.cmake"
+        }
+    ]
+}

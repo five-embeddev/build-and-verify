@@ -5,7 +5,7 @@ ARG NODE_VERSION=16.16.0
 ARG NVM_VERSION=v0.38.0
 ARG DOCKER_USER_UID=1000
 ARG TZ=UTC
-ARG BASE_IMAGE=ubuntu:focal
+ARG BASE_IMAGE=ubuntu:jammy
 
 FROM ${BASE_IMAGE} AS riscv_xpack_gcc_base_env 
 

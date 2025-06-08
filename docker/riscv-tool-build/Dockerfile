@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=ubuntu:focal
+ARG BASE_IMAGE=ubuntu:jammy
 FROM ${BASE_IMAGE} AS riscv_tools_build_env
 
 ARG DOCKER_USER_UID=1000
@@ -48,6 +48,18 @@ RUN sudo apt-get update && sudo apt-get install -y \
     libmpc-dev \
     libmpfr-dev \
     zlib1g-dev 
+
+# HTTP Git clone is unreliable for gcc etc
+# gh cli may resolve this, but need to setup token.
+# RUN sudo apt-get update && sudo apt-get install -y \
+#     gpg
+# RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+#     | sudo gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg
+# RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
+#     | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null;
+# RUN sudo apt-get update && sudo apt-get install -y \
+#     gh
+
 
 RUN sudo mkdir /project && sudo chown docker_user /project
 RUN sudo chown docker_user /opt

@@ -2,7 +2,7 @@ ARG DOCKER_USER_UID=1000
 ARG TZ=UTC
 ARG SPIKE_TAG=master
 ARG SPIKE_URL=https://github.com/riscv-software-src/riscv-isa-sim.git
-ARG BASE_IMAGE=ubuntu:focal
+ARG BASE_IMAGE=ubuntu:jammy
 
 # ------------------------------------------------------------------------
 FROM fiveembeddev/build_env:latest  AS riscv_spike_build_config
@@ -66,7 +66,7 @@ RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 COPY --from=riscv_spike_build_config ${INSTALL_PATH} ${INSTALL_PATH}
 
-RUN sudo apt-get install -y  libboost-regex1.71.0
+RUN sudo apt-get install -y  libboost-regex1.74.0
 
 USER docker_user
 ENV PATH=${INSTALL_PATH}/bin:/bin:/usr/bin:/usr/local/bin

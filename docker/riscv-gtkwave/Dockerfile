@@ -1,6 +1,6 @@
 ARG OPENOCD_TAG=riscv
 ARG DOCKER_USER_UID=1000
-ARG BASE_IMAGE=ubuntu:focal
+ARG BASE_IMAGE=ubuntu:jammy
 ARG RISCV_GTKWAVE_TAG=main
 ARG RISCV_GTKWAVE_URL=https://github.com/five-embeddev/riscv-gtkwave.git
 ARG INSTALL_PATH=/opt/riscv_gtkwave/

@@ -1,9 +1,26 @@
+# -*- Makefile -*-
+#
+IMAGE_NAME=riscv_gnu_toolchain_dev_env2
+
 include ../common.mak
+
+RELEASE_TAG:=${RELEASE_TAG}_gcc_${GCC_TAG}
 
 MOUNT_BUILD_PATH=/project/build_dir
 MOUNT_INSTALL_PATH=/opt/riscv-gnu-toolchain
 COMPOSE_RUN_BUILD_DIR=${DOCKER_COMPOSE} run -w ${MOUNT_BUILD_PATH} build_env
 COMPOSE_RUN_SRC_DIR=${DOCKER_COMPOSE} run -w ${MOUNT_BUILD_PATH}/riscv-gnu-toolchain build_env
+#BASE_REPO=https://github.com/riscv-collab/riscv-gnu-toolchain.git
+BASE_REPO=git@github.com:riscv-collab/riscv-gnu-toolchain.git
+
+# Https clone in docker is unreliable
+#GIT_RUN_BUILD_DIR=${COMPOSE_RUN_BUILD_DIR}
+#GIT_RUN_SRC_DIR=${COMPOSE_RUN_SRC_DIR}
+# Do git operations in host
+GIT_RUN_BUILD_DIR=cd build_dir &&
+GIT_RUN_SRC_DIR=cd build_dir/riscv-gnu-toolchain &&
+
+
 
 all : dev_env
 
@@ -16,16 +33,16 @@ docker_build/install_dir/bin/riscv32-unknown-elf-gcc :
 		--build-arg DOCKER_USER_UID=${DOCKER_USER_UID} \
 		build_env
 	${COMPOSE_RUN_BUILD_DIR} rm -rf riscv-gnu-toolchain
-	${COMPOSE_RUN_BUILD_DIR} git clone \
+	${GIT_RUN_BUILD_DIR} git clone \
 		--depth 1 \
 		--branch ${GNU_TOOLCHAIN_TAG} \
-		https://github.com/riscv-collab/riscv-gnu-toolchain.git
-	${COMPOSE_RUN_SRC_DIR} git submodule set-branch --branch ${GCC_TAG} riscv-gcc
-	${COMPOSE_RUN_SRC_DIR} git submodule update  \
+		${BASE_REPO}
+	${GIT_RUN_SRC_DIR} git submodule set-branch --branch ${GCC_TAG} gcc
+	${GIT_RUN_SRC_DIR} git submodule update  \
 	    	--init \
 		--recursive \
 		--recommend-shallow \
-		riscv-binutils riscv-dejagnu riscv-gdb riscv-glibc riscv-newlib riscv-gcc
+		binutils dejagnu gdb glibc newlib gcc
 	${COMPOSE_RUN_SRC_DIR} ./configure \
 	    --prefix=${MOUNT_INSTALL_PATH} \
 	    --with-tune=size \
@@ -41,3 +58,6 @@ dev_env : docker_build/install_dir/bin/riscv32-unknown-elf-gcc
 distclean:
 	rm -rf docker_build/install_dir
 	rm -rf build_dir
+
+include ../targets.mak
+
