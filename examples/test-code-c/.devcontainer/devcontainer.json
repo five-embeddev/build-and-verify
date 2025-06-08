@@ -1,0 +1,9 @@
+{
+    "name" : "RISC-V Dev",
+    "image": "fiveembeddev/riscv_xpack_gcc_dev_env:latest",
+    "customizations": {
+        "vscode": {
+          "extensions": ["cmake"]
+        }
+      },    
+}
