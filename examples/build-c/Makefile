@@ -27,7 +27,10 @@ riscv-none-embed_out : test.c
 
 riscv32-unknown-elf_out : test.c
 	${DOCKER_CMD} \
-		fiveembeddev/riscv_gnu_toolchain_dev_env:latest \
+		fiveembeddev/riscv_gnu_toolchain_dev_env2:latest \
 		riscv32-unknown-elf-gcc \
 		test.c \
 		-o riscv32-unknown-elf_out
+
+clean :
+	rm -f riscv32-unknown-elf_out riscv-none-embed_out

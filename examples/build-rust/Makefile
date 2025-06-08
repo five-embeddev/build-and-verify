@@ -1,3 +1,5 @@
+all : test.elf
+
 test.elf : test.rs
 	docker run \
          --rm \
@@ -8,3 +10,6 @@ test.elf : test.rs
 			/project/test.rs \
 			-o test.elf
 
+
+clean :
+	rm -f test.elf
