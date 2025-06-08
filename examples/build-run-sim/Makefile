@@ -85,4 +85,7 @@ sim_help:
 		/opt/riscv-isa-sim/bin/spike \
 			--help
 
-.PHONY : build sim
+clean :
+	rm -rf test.vcd build/
+
+.PHONY : build sim clean
