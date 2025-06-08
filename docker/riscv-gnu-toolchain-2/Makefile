@@ -1,6 +1,6 @@
 # -*- Makefile -*-
 #
-IMAGE_NAME=riscv_gnu_toolchain2_dev_env2
+IMAGE_NAME=riscv_gnu_toolchain_dev_env2
 
 include ../common.mak
 
