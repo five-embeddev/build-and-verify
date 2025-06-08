@@ -25,7 +25,8 @@ NO_CACHE=
 # Versions
 SPIKE_TAG=v1.1.0
 SPIKE_URL=https://github.com/riscv-software-src/riscv-isa-sim.git
-GNU_TOOLCHAIN_TAG=2022.03.09
+#GNU_TOOLCHAIN_TAG=2022.03.09
+GNU_TOOLCHAIN_TAG=2025.05.30
 GCC_TAG=riscv-gcc-10.2.0
 
 # Default arch
