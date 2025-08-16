@@ -17,17 +17,15 @@ RUN sudo apt-get update -qq && sudo apt-get install -y device-tree-compiler
 RUN sudo mkdir -p /work/git  && sudo chown -R docker_user /work/
 WORKDIR  /work/git/
 
+# Requires git 2.49.0+
 RUN git clone \
     --depth 1\
-    --recursive  \
-    --branch ${SPIKE_TAG} \
+    --shallow-submodules \
+    --recurse-submodules \
+    --revision ${SPIKE_TAG} \
     ${SPIKE_URL}
 
 WORKDIR  /work/git/riscv-isa-sim
-RUN git submodule update  \
-    --init \
-    --recursive \
-    --recommend-shallow 
 
 RUN sudo apt-get install -y libasio-dev libboost-regex-dev libboost-system-dev libboost-thread-dev
 # Configure

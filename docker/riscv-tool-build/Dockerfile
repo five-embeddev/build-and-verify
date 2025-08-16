@@ -21,6 +21,10 @@ USER docker_user
 
 # Basic OS update
 RUN DEBIAN_FRONTEND="noninteractive" sudo apt-get update && sudo apt-get -y install tzdata
+
+# Upstream git
+RUN sudo apt-get update && sudo apt-get install -y software-properties-common
+RUN sudo add-apt-repository -y ppa:git-core/ppa
 RUN sudo apt-get update && sudo apt-get install -y git
 RUN sudo apt-get update && sudo apt-get install -y \
     bison \

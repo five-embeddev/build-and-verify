@@ -8,7 +8,7 @@ BASE_IMAGE=ubuntu:jammy
 DOCKER_REPO=
 DOCKER_USER=fiveembeddev
 
-RELEASE_VERSION=0.2.0
+RELEASE_VERSION=0.3.0
 RELEASE_LABEL=env_${RELEASE_VERSION}
 BUILD_TAG=${DOCKER_USER}/${IMAGE_NAME}:latest
 RELEASE_TAG=${DOCKER_USER}/${IMAGE_NAME}:${RELEASE_LABEL}
@@ -23,8 +23,17 @@ NO_CACHE=
 #export DOCKER_BUILDKIT=0
 
 # Versions
+
+# Last Release version is from 2021
 SPIKE_TAG=v1.1.0
+SPIKE_DATE=20211217
+# Latest passing commit (when this file was edited)
+SPIKE_LATEST_HASH=4f1d8abf39aa9d189d923e7720da64a3008f7a8f
+SPIKE_LATEST_DATE=20250614
+# Default Spike
 SPIKE_URL=https://github.com/riscv-software-src/riscv-isa-sim.git
+
+
 #GNU_TOOLCHAIN_TAG=2022.03.09
 GNU_TOOLCHAIN_TAG=2025.05.30
 GCC_TAG=riscv-gcc-10.2.0
